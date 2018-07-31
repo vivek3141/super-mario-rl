@@ -30,4 +30,4 @@ Eg. If you want to run 1-1
 
 ## Images
 
-<Insert Image here>
+![alt text](https://github.com/vivek3141/super-mario-ai/images/img1.png "World 1-1")
