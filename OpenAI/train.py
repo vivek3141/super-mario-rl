@@ -12,7 +12,8 @@ import os
 max_mean_reward = 0
 last_filename = ""
 
-def parser():
+
+def parse():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--env', help='environment ID', default='SuperMarioBros-v0')
     parser.add_argument('--seed', help='RNG seed', type=int, default=0)
@@ -27,7 +28,6 @@ def parser():
 
 
 def callback(locals, globals):
-    # pprint.pprint(locals)
     PROJ_DIR = os.path.dirname(os.path.abspath(__file__))
     global max_mean_reward, last_filename
     if 'done' in locals and locals['done'] == True:
@@ -61,10 +61,10 @@ def callback(locals, globals):
             last_filename = filename
 
 
-args = parser()
+args = parse()
 logger.configure()
 set_global_seeds(args.seed)
-env = gym.make("SuperMarioBros-v0")
+env = gym_super_mario_bros.make('SuperMarioBros-v0')
 env = BinarySpaceToDiscreteSpaceEnv(env, SIMPLE_MOVEMENT)
 state = env.reset()
 done = False
