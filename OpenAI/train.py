@@ -7,7 +7,7 @@ from baselines.common import set_global_seeds
 from baselines import deepq
 from baselines import logger
 from ActWrapper import ActWrapper
-import os
+import os, cv2
 
 max_mean_reward = 0
 last_filename = ""
@@ -20,7 +20,7 @@ def parse():
     parser.add_argument('--prioritized', type=int, default=1)
     parser.add_argument('--prioritized-replay-alpha', type=float, default=0.6)
     parser.add_argument('--dueling', type=bool, default=False)
-    parser.add_argument('--num-timesteps', type=int, default=2000000)
+    parser.add_argument('--num-timesteps', type=int, default=20000)
     parser.add_argument('--checkpoint-freq', type=int, default=10)
     parser.add_argument('--checkpoint-path', type=str, default="./ModelCheckpoint/")
     args = parser.parse_args()
@@ -64,11 +64,10 @@ def callback(locals, globals):
 args = parse()
 logger.configure()
 set_global_seeds(args.seed)
-env = gym_super_mario_bros.make('SuperMarioBros-v0')
+env = gym_super_mario_bros.make('SuperMarioBros-v3')
 env = BinarySpaceToDiscreteSpaceEnv(env, SIMPLE_MOVEMENT)
 state = env.reset()
 done = False
-
 model = deepq.models.cnn_to_mlp(
     convs=[(32, 8, 4), (64, 4, 2), (64, 3, 1)],
     hiddens=[256],
