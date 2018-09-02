@@ -32,4 +32,4 @@ Eg. If you want to run 1-1
 
 ![alt text](https://github.com/vivek3141/super-mario-ai/blob/master/Images/img1.png "World 1-1")
 
-Implementation of NEAT is still in progress.
+Implementation of NEAT can be found [here](https://github.com/vivek3141/super-mario-neat)
